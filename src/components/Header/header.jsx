@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+
 import { TypeAnimation } from 'react-type-animation';
 import { isMobile } from 'react-device-detect';
 import './header.scss';
 import { useEffect } from 'react';
+import CyberButton from '../CyberButton/cyberButton';
 
 const Header = ({ headerData }) => {
     const [activeMenu, setActiveMenu] = useState(false);
@@ -38,7 +40,7 @@ const Header = ({ headerData }) => {
                                     <a href="#faq">FAQ</a>
                                 </li>
                                 <li className="link">
-                                    <a href="#map">Карта охвата</a>
+                                    <a href="#address">Карта охвата</a>
                                 </li>
                                 <li className="link">
                                     <a href="#connect">Подключиться</a>
@@ -72,6 +74,7 @@ const Header = ({ headerData }) => {
                                             );
                                         })}
                                     </ul>
+
                                     <a href="#" className="btn">
                                         Подключиться
                                     </a>
@@ -103,9 +106,7 @@ const Header = ({ headerData }) => {
                                 repeat={Infinity}
                             />
                         </p>
-                        <a href="#" className="btn">
-                            Подключить
-                        </a>
+                        <CyberButton href={'#connect'} />
                     </div>
                 </div>
             </main>
