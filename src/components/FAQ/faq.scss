@@ -1,0 +1,86 @@
+section.faq {
+    min-height: 801px;
+}
+.faq {
+    background-image: url('../../assets/img/bg_2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    &-tabs {
+        background: rgba(0, 0, 0, 0.41);
+        padding: 20px 20px 20px 40px;
+        margin-top: 40px;
+        &-list {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            &-element {
+                width: 100%;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                font-family: 'Montserrat Bold';
+                font-size: 1.125rem;
+                position: relative;
+                cursor: pointer;
+
+                &-description {
+                    height: 0px;
+                    text-align: left;
+                    font-size: 0.875rem;
+                    width: 800px;
+                    max-width: 100%;
+                    margin-top: 0px;
+                    overflow: hidden;
+                    font-family: 'Open Sans Regular';
+                }
+
+                &.active &-description {
+                    height: 80px;
+                    margin-top: 20px;
+                }
+            }
+            &-element::before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: -25px;
+                top: 5px;
+                width: 21px;
+                height: 10px;
+                background-image: url('../../assets/img/icons/faq_arrow.svg');
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+                transition: 0.3s;
+            }
+            &-element::after {
+                content: '';
+                display: block;
+                position: absolute;
+
+                top: 25px;
+                width: 0%;
+                height: 3px;
+                background: linear-gradient(#de90ff, #ffa0c8);
+                transition: 0.3s;
+            }
+            &-element.active::before {
+                transform: rotateZ(-90deg);
+            }
+            &-element.active::after {
+                width: 50%;
+            }
+        }
+    }
+}
+
+
+//mobile
+
+@media screen and (max-width: 800px) {
+    .faq-tabs-list-element::after {
+        display: none;
+    }
+}

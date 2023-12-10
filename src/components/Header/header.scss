@@ -1,0 +1,173 @@
+$header_links_color: #de90ff;
+
+main {
+    width: 100%;
+
+    height: 90vh;
+    background-image: url('../../assets/img/bg_1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-origin: padding-box;
+    background-repeat: no-repeat;
+    padding-top: 40px;
+    .header {
+        &-navigations {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+
+            &-logo {
+                display: flex;
+                width: 162px;
+                height: 36px;
+                justify-content: space-between;
+                align-items: center;
+                background-image: url('../../assets/img/logo.svg');
+                background-repeat: no-repeat;
+            }
+            &-burger-menu{
+                position: fixed;
+                right: 40px;
+                z-index: 2;
+                width: 30px;
+                height: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                div {
+                    width: 100%;
+                    height: 2px;
+                    background-color: $header_links_color;
+                }
+                &.open{
+                        div:nth-child(1) {
+                            margin-left: -6px;
+                        }
+                        div:nth-child(3) {
+                            margin-left: 6px;
+                        }
+                }
+               
+            }
+            &-links,
+            &-links-mobile,
+            &-phones {
+                display: flex;
+                gap: 20px;
+            }
+           
+            &-links {
+                transition: 0.3s;
+                color: white;
+                font-size: 1rem;
+                .link a {
+                    font-family: 'Montserrat Bold';
+                    &:hover {
+                        text-decoration: none;
+                        color: $header_links_color;
+                        &:after {
+                            width: 100%;
+                            margin-left: 0%;
+                        }
+                    }
+                    &:after {
+                        transition: 0.3s;
+                        width: 0%;
+                        margin-left: 50%;
+                        margin-top: 4px;
+                        height: 2px;
+                        display: block;
+                        content: '';
+                        background: $header_links_color;
+                    }
+                }
+            }
+            &-links-mobile {
+                box-shadow: 0px 0px 5px $header_links_color;
+                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
+                 z-index: 1;
+                top: 0;
+                right: -100%;
+                flex-direction: column;
+                position: fixed;
+                background: #0000009a;
+                padding: 20px;
+                padding-top: 120px;
+                &.open{
+                    right: 0;
+                }
+                .link a {
+                    font-family: 'Montserrat Bold';
+                    &:hover {
+                        text-decoration: none;
+                        color: $header_links_color;
+                        &:after {
+                            width: 100%;
+                            margin-left: 0%;
+                        }
+                    }
+                    &:after {
+                        transition: 0.3s;
+                        width: 0%;
+                        margin-left: 50%;
+                        margin-top: 4px;
+                        height: 2px;
+                        display: block;
+                        content: '';
+                        background: $header_links_color;
+                    }
+                }
+            }
+            &-phones {
+                gap: 4px;
+                align-items: center;
+                &-phone {
+                    background-image: url('../../assets/img/icons/call.svg');
+                    background-repeat: no-repeat;
+                }
+                a.btn {
+                    margin-left: 20px;
+                    padding: 12px 30px 11px 30px;
+                    font-size: 0.875rem;
+                }
+            }
+        }
+    }
+    .text {
+        margin-top: 200px;
+        p {
+            font-family: 'Montserrat Light Italic';
+            font-size: 1.75rem;
+            margin-top: 12px;
+            margin-bottom: 48px;
+        }
+    }
+}
+
+//mobile
+@media screen and (max-width: 1130px){
+    main .header-navigations-phones a.btn {
+        display: none;
+    }
+}
+@media screen and (max-width: 600px){
+    main {
+        .header-navigations-burger-menu {
+            right: 10px;
+        }
+        .text {
+            text-align: center;
+            margin-top: 140px;
+           h1{
+            font-size: 36px;
+           }
+            p {
+               font-size: 16px;
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+.connect {
+    min-height: 200px;
+    padding-top: 120px;
+    background-image: url('../../assets/img/bg_3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    &-form {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        input {
+            width: 400px;
+            max-width: 100%;
+        }
+        &-checkbox {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+            align-self: flex-start;
+            &-fake {
+                width: 22px;
+                height: 22px;
+                background-image: url('../../assets/img/icons/checkbox.svg');
+                background-size: cover;
+            }
+            input[type='checkbox']:checked ~ &-fake {
+                background-image: url('../../assets/img/icons/checkbox_accept.svg');
+            }
+            &-description {
+                font-size: 0.875rem;
+                font-family: 'Montserrat Light';
+                color: #ecbeff;
+                a {
+                    color: #ecbeff;
+                    text-decoration: underline;
+                }
+            }
+            input[type='checkbox'] {
+                display: none;
+                box-shadow: none;
+                justify-self: flex-start;
+                align-self: flex-start;
+                width: 40px;
+            }
+        }
+
+        button {
+            border-radius: 0;
+            width: 100%;
+        }
+    }
+}

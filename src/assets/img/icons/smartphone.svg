@@ -1,0 +1,11 @@
+<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ic:baseline-phone-iphone">
+<path id="Vector" d="M15.5 1.5H7.5C6.83696 1.5 6.20107 1.76339 5.73223 2.23223C5.26339 2.70107 5 3.33696 5 4V21C5 21.663 5.26339 22.2989 5.73223 22.7678C6.20107 23.2366 6.83696 23.5 7.5 23.5H15.5C16.163 23.5 16.7989 23.2366 17.2678 22.7678C17.7366 22.2989 18 21.663 18 21V4C18 3.33696 17.7366 2.70107 17.2678 2.23223C16.7989 1.76339 16.163 1.5 15.5 1.5ZM11.5 22.5C10.67 22.5 10 21.83 10 21C10 20.17 10.67 19.5 11.5 19.5C12.33 19.5 13 20.17 13 21C13 21.83 12.33 22.5 11.5 22.5ZM16 18.5H7V4.5H16V18.5Z" fill="url(#paint0_linear_16_170)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_16_170" x1="5" y1="2.11111" x2="24.2711" y2="13.4986" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DE90FF"/>
+<stop offset="1" stop-color="#FFA0C8"/>
+</linearGradient>
+</defs>
+</svg>

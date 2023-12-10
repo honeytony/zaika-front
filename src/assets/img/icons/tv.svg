@@ -1,0 +1,11 @@
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mdi:tv-box">
+<path id="Vector" d="M5.5 3.5H19.5C20.0304 3.5 20.5391 3.71071 20.9142 4.08579C21.2893 4.46086 21.5 4.96957 21.5 5.5V19.5C21.5 20.0304 21.2893 20.5391 20.9142 20.9142C20.5391 21.2893 20.0304 21.5 19.5 21.5H5.5C4.96957 21.5 4.46086 21.2893 4.08579 20.9142C3.71071 20.5391 3.5 20.0304 3.5 19.5V5.5C3.5 4.96957 3.71071 4.46086 4.08579 4.08579C4.46086 3.71071 4.96957 3.5 5.5 3.5ZM16.5 16.5L19.5 8.5H17L15.5 13L14 8.5H5.5V10.5H8.5V16.5H10.5V10.5H12.27L14.5 16.5H16.5Z" fill="url(#paint0_linear_16_77)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_16_77" x1="3.5" y1="4" x2="21.5" y2="22" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DE90FF"/>
+<stop offset="1" stop-color="#FFA0C8"/>
+</linearGradient>
+</defs>
+</svg>
