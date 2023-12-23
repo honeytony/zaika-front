@@ -1,7 +1,7 @@
 import React from 'react';
 import './footer.scss';
 
-const Footer = () => {
+const Footer = ({ headerData }) => {
     return (
         <footer className="footer">
             <div className="container footer-container">
@@ -28,10 +28,10 @@ const Footer = () => {
                 <nav className="footer-container-tels">
                     <ul>
                         <li>
-                            <a href="tel:89502224497">89502224497</a>
+                            <a href={`tel:${headerData?.phone1}`}>+{headerData?.phone1}</a>
                         </li>
                         <li>
-                            <a href="tel:89502224497">89502224497</a>
+                            <a href={`tel:${headerData?.phone2}`}>+{headerData?.phone2}</a>
                         </li>
                     </ul>
                 </nav>

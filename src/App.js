@@ -1,5 +1,4 @@
 // import axios from 'axios';
-import { useEffect, useState } from 'react';
 import './App.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './pages/main';
@@ -11,7 +10,7 @@ function App() {
             <Routes>
                 {' '}
                 <Route path="/" element={<Main />} />
-                <Route path="/two" element={<Personality />} />
+                <Route path="/person" element={<Personality />} />
             </Routes>
         </BrowserRouter>
     );

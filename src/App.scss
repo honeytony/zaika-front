@@ -201,7 +201,7 @@ input,
     justify-content: space-between;
     padding: 20px;
     .placeholder {
-        color: rgba($color: #fdfdfd, $alpha: 0.6);
+        color: rgba($color: #fdfdfd, $alpha: 1);
     }
     &::after {
         content: '';
@@ -225,13 +225,14 @@ input,
     width: 100%;
     padding: 12px 0 12px 10px;
     background-color: rgba(0, 0, 0, 0.849);
-    border-bottom: 1px solid $primary_color;
+    border-bottom: 1px solid #de90ff;
     backdrop-filter: blur(3px);
     color: white;
     text-align: left;
     cursor: pointer;
     &:hover {
-        background-color: #edc4ff;
+        background-color: rgba(70, 70, 70, 0.849);
+        backdrop-filter: blur(2px);
     }
 }
 

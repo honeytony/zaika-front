@@ -2,19 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import './address.scss';
 
-const Address = ({ addressData }) => {
+const Address = ({ addressData, getAddressData }) => {
     const [foundAddresses, setFoundAddresses] = useState([]);
     const [addressInput, setAddressInput] = useState('');
     const checkAddress = (address) => {
         setAddressInput(address);
-        let found = '';
         if (address.length > 2) {
-            found = addressData.filter((item) => {
-                return item.toLowerCase().startsWith(address.toLowerCase());
-            });
-        }
-        if (found) {
-            setFoundAddresses(found.slice(0, 3));
+            getAddressData(address, setFoundAddresses);
         } else {
             setFoundAddresses([]);
         }

@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
+.preloader-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    // .logo {
+    //     display: flex;
+    //     position: absolute;
+    //     width: 42px;
+    //     height: 42px;
+    //     justify-content: space-between;
+    //     background-image: url('../../assets/img/logo.svg');
+    //     background-repeat: no-repeat;
+    //     background-size: cover;
+    //     animation: rotate 2s linear infinite;
+    //     z-index: 4;
+    // }
+    // .logo:before {
+    //     content: '';
+    //     width: 41px;
+    //     height: 41px;
+    //     background-image: url('../../assets/img/prelogo.svg');
+    //     background-repeat: no-repeat;
+    //     background-size: cover;
+    //     opacity: 1;
+    //     animation: blink 3s infinite;
+    // }
+    &.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .preloader {
+        width: 6rem;
+        height: 6rem;
+        background-image: url('../../assets/img/preloader.svg');
+    }
+}
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}

@@ -3,62 +3,70 @@ import InputMask from 'react-input-mask';
 
 import './connect.scss';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const saveField = (e, setField) => {
     setField(e.target.value);
 };
 
-const Connect = ({ tariffs }) => {
+const Connect = ({ tariffs, choosedTarif, setChoosetTarif }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [choosedTarif, setChoosetTarif] = useState('Выберите тариф');
     const [fioField, setFioField] = useState('');
     const [phoneField, setPhoneField] = useState('');
+    const [popupInfo, setPopupInfo] = useState({
+        title: 'Форма успешно отправлена!',
+        desc: 'В течении суток с вами свяжется оператор',
+    });
+    const [isShowPopup, setIsShowPopup] = useState(false);
+    const handlePopup = () => {
+        setIsShowPopup((prev) => !prev);
+    };
 
-    useEffect(() => {
-        console.log('fio->', fioField);
-        console.log('ph->', phoneField);
-        console.log('tar->', choosedTarif);
-    }, [fioField, phoneField, choosedTarif]);
+    // useEffect(() => {
+    //     console.log('fio->', fioField);
+    //     console.log('ph->', phoneField);
+    //     console.log('tar->', choosedTarif);
+    // }, [fioField, phoneField, choosedTarif]);
 
-    // const url = 'https://11bf-91-215-201-1.ngrok-free.app';
+    const url = `${process.env.REACT_APP_DB_IP}/api/form`;
     // useEffect(() => {
     //     console.log(fioField);
     // }, [fioField]);
-    // const sendForm = () => {
-    //     axios
-    //         .post(`${url}/form`, {
-    //             firstName: fioField,
-    //             phone: phoneField,
-    //         })
-    //         .then(function (response) {
-    //             console.log(response);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-    // };
 
-    {
-        /* <form action="#">
-                <input
-                    type="text"
-                    placeholder="ФИО"
-                    onChange={(e) => {
-                        saveField(e, setFioField);
-                    }}
-                />
-                <input
-                    type="text"
-                    placeholder="Телефон"
-                    onChange={(e) => {
-                        saveField(e, setPhoneField);
-                    }}
-                />
-                <button onClick={sendForm}>Отправить</button>
-            </form> */
-    }
+    const sendForm = (e) => {
+        e.preventDefault();
+        axios
+            .post(`${url}`, {
+                firstName: fioField,
+                phone: phoneField,
+                tariffName: choosedTarif,
+            })
+            .then(function (response) {
+                console.log(response.response);
+                setPopupInfo({
+                    title: 'Форма успешно отправлена!',
+                    desc: 'В течении суток с вами свяжется оператор',
+                });
+                handlePopup();
+            })
+            .catch(function (error) {
+                console.log(error.response.data.message);
+                setPopupInfo({ title: 'Ошибка', desc: error.response.data.message });
+                handlePopup();
+            });
+    };
+
     return (
         <section id="connect" className="connect">
+            <div className={isShowPopup ? 'popup show' : 'popup'}>
+                <div className="close-btn" onClick={() => handlePopup()}>
+                    <div></div>
+                    <div></div>
+                </div>
+                <p className="header">{popupInfo?.title}</p>
+                <p className="desc">{popupInfo?.desc}</p>
+            </div>
+
             <div className="container">
                 <h2>Оставить заявку</h2>
                 <p className="description">Оставьте заявку и мы свяжемся с Вами!</p>
@@ -80,8 +88,8 @@ const Connect = ({ tariffs }) => {
                         placeholder="Номер телефона"
                     /> */}
                     <InputMask
-                        mask="+7(999)999-99-99"
-                        maskChar="_"
+                        mask="+7 999 999 99 99"
+                        maskChar=""
                         type="text"
                         value={phoneField}
                         onChange={(e) => {
@@ -120,10 +128,12 @@ const Connect = ({ tariffs }) => {
                             <div className="connect-form-checkbox-fake"></div>
                         </label>
                         <p className="connect-form-checkbox-description">
-                            Согласие на <Link to="/two">обработку персональных данных</Link>
+                            Согласие на <Link to="/person">обработку персональных данных</Link>
                         </p>
                     </div>
-                    <button type="submit">Отправить</button>
+                    <button type="submit" onClick={(e) => sendForm(e)}>
+                        Отправить
+                    </button>
                 </form>
             </div>
         </section>

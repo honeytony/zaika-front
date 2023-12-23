@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './tarrifs.scss';
 
-const Tariffs = ({ tariffsData }) => {
+const Tariffs = ({ tariffsData, setChoosetTarif }) => {
     var settings = {
         dots: true,
         infinite: false,
@@ -16,31 +16,32 @@ const Tariffs = ({ tariffsData }) => {
             {
                 breakpoint: 1000,
                 settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 1,
-                  arrows: false
-                }
-              },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                
-                arrows: false
-              }
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: false,
+                },
             },
             {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                
-                arrows: false
-              }
-            }
-          ]
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+
+                    arrows: false,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+
+                    arrows: false,
+                },
+            },
+        ],
     };
+
     return (
         <section id="tarrifs" className="tarrifs">
             <div className="container">
@@ -110,21 +111,21 @@ const Tariffs = ({ tariffsData }) => {
                                                             </div>
                                                         </li>
                                                     ) : null}
-                                                    {tariff.mobile ? (
+                                                    {tariff?.mobile?.length ? (
                                                         <li className="tarrifs-slider-slide-card-headers-options-phone">
                                                             <div className="tarrifs-slider-slide-card-headers-options-phone-icon icon"></div>
                                                             <div className="tarrifs-slider-slide-card-headers-options-phone-text">
                                                                 <p>
                                                                     <span className="tarrifs-slider-slide-card-headers-options-phone-text-bold">
-                                                                        {tariff.mobile.gb}
+                                                                        {tariff?.mobile[0]?.gb}
                                                                     </span>
                                                                     гб/
                                                                     <span className="tarrifs-slider-slide-card-headers-options-phone-text-bold">
-                                                                        {tariff.mobile.min}
+                                                                        {tariff?.mobile[0]?.min}
                                                                     </span>
                                                                     мин/
                                                                     <span className="tarrifs-slider-slide-card-headers-options-phone-text-bold">
-                                                                        {tariff.mobile.sms}
+                                                                        {tariff?.mobile[0]?.sms}
                                                                     </span>
                                                                     СМС
                                                                 </p>
@@ -147,12 +148,13 @@ const Tariffs = ({ tariffsData }) => {
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="#"
+                                                    onClick={() => setChoosetTarif(tariff.title)}
+                                                    href="#connect"
                                                     className="btn tarrifs-slider-slide-card-cost-button">
                                                     Подключить
                                                 </a>
                                                 <a
-                                                    href="#"
+                                                    href="#connect"
                                                     className="tarrifs-slider-slide-card-cost-after">
                                                     Подробнее о тарифе
                                                 </a>

@@ -8,20 +8,18 @@ import Faq from '../components/FAQ/faq';
 import Footer from '../components/Footer/footer';
 import Header from '../components/Header/header';
 import Tariffs from '../components/Tarrifs/tariffs';
+import axios from 'axios';
+import Preloader from '../components/Preloader/preloader';
 
 function Main() {
-    const [headerData, setHeaderData] = useState({
-        title: 'Безлимитный интернет',
-        second_title: [
-            'Высокая скорость у Вас дома!',
-            2000,
-            'Подключение завтра!',
-            2000,
-            'Выгодные тарифы!',
-            2000,
-        ],
-        phones: ['+79502224497', '+79502224497'],
-    });
+    const faqApi = `${process.env.REACT_APP_DB_IP}/api/faq`;
+    const tariffsApi = `${process.env.REACT_APP_DB_IP}/api/tariffs`;
+    const infoApi = `${process.env.REACT_APP_DB_IP}/api/info`;
+    const addressApi = `${process.env.REACT_APP_DB_IP}/api/streets`;
+
+    const [choosedTarif, setChoosetTarif] = useState('Выберите тариф');
+
+    const [headerData, setHeaderData] = useState({});
 
     const [tariffsData, setTariffsData] = useState([
         {
@@ -51,7 +49,7 @@ function Main() {
             price: 500,
             tv: 184,
             serials: 25000,
-            mobile: { gb: 12, min: 13, sms: 105 },
+            mobile: [{ gb: 12, min: 13, sms: 105 }],
             recommend: false,
         },
         {
@@ -127,16 +125,93 @@ function Main() {
         'Старокерская 89',
     ]);
 
-    const tariffs = ['1asdsad', '2asdasd', '3asdasd'];
+    const [tariffs, setTariffs] = useState(['1asdsad', '2asdasd', '3asdasd']);
+    const [isLoading, setIsLoading] = useState(true);
+    function getData(api, setFunction) {
+        axios.get(api).then((data) => {
+            setFunction(data.data);
+        });
+    }
+
+    function getTarrifsData() {
+        axios.get(tariffsApi).then((data) => {
+            let newData = [];
+            data.data.forEach((tariffs) => {
+                console.log(tariffs);
+                newData.push(tariffs.title);
+            });
+            setTariffsData(data.data);
+            setTariffs(newData);
+        });
+    }
+
+    function getAddressData(text, setFunction) {
+        let data = JSON.stringify({
+            qerySearch: text,
+        });
+
+        let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: addressApi,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: data,
+        };
+
+        axios
+            .request(config)
+            .then((response) => {
+                setFunction(response.data);
+            })
+            .catch((error) => {
+                // if (error.response) {
+                //     console.log(error.response.data);
+                //     console.log(error.response.status);
+                //     console.log(error.response.headers);
+                // } else if (error.request) {
+                //     // no response
+                //     console.log(error.request);
+                // } else {
+                //     // Something wrong in setting up the request
+                //     console.log('Error', error.message);
+                // }
+                // console.log(error.config);
+            });
+        // axios.get(addressApi).then((data) => {
+        //     console.log('address->' + data.data);
+        //     setFunction(data.data);
+        // });
+    }
+
+    useEffect(() => {
+        getData(infoApi, setHeaderData);
+        getTarrifsData();
+        getData(faqApi, setFaqData);
+    }, []);
+
+    useEffect(() => {
+        if (headerData.title) {
+            setTimeout(() => {
+                setIsLoading((prev) => !prev);
+            }, 1000);
+        }
+    }, [headerData]);
 
     return (
         <div className="App">
+            {<Preloader isLoading={isLoading} />}
             <Header headerData={headerData} />
-            <Tariffs tariffsData={tariffsData} />
+            <Tariffs tariffsData={tariffsData} setChoosetTarif={setChoosetTarif} />
             <Faq faqData={faqData} />
-            <Address addressData={addressData} />
-            <Connect tariffs={tariffs} />
-            <Footer />
+            <Address addressData={addressData} getAddressData={getAddressData} />
+            <Connect
+                tariffs={tariffs}
+                choosedTarif={choosedTarif}
+                setChoosetTarif={setChoosetTarif}
+            />
+            <Footer headerData={headerData} />
         </div>
     );
 }

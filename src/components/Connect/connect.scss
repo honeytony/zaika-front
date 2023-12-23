@@ -4,6 +4,68 @@
     background-image: url('../../assets/img/bg_3.png');
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
+    .popup {
+        transition: 0.3s;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+        width: 400px;
+        max-width: 90%;
+        padding: 0 20px;
+        height: 220px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 1px solid #de90ff;
+        box-shadow: 0px 0px 10px 0px #de90ff;
+        backdrop-filter: blur(3px);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+
+        .header {
+            font-size: 1.2rem;
+            font-family: 'Montserrat Bold';
+        }
+        .desc {
+            font-size: 1rem;
+            font-family: 'Montserrat Light Italic';
+        }
+        .close-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+
+            div {
+                position: absolute;
+                width: 2px;
+                height: 30px;
+                background-color: #de90ff;
+                transform: translate(14px, 0px) rotateZ(-45deg);
+                &:nth-child(2) {
+                    transform: translate(14px, 0px) rotateZ(45deg);
+                }
+            }
+            &:hover {
+                div {
+                    background-color: #fff;
+                }
+            }
+        }
+        &.show {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -30%);
+        }
+    }
+
     &-form {
         margin-top: 40px;
         display: flex;

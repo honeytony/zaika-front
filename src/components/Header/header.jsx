@@ -50,13 +50,16 @@ const Header = ({ headerData }) => {
                                         <div className="header-navigations-phones">
                                             <div className="icon header-navigations-phones-phone"></div>
                                             <ul className="header-navigations-phones-links">
-                                                {headerData.phones.map((phone, index) => {
-                                                    return (
-                                                        <li key={index}>
-                                                            <a href={`tel:${phone}`}>{phone}</a>
-                                                        </li>
-                                                    );
-                                                })}
+                                                <li>
+                                                    <a href={`tel:+${headerData?.phone1}`}>
+                                                        +{headerData?.phone1}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href={`tel:+${headerData?.phone2}`}>
+                                                        +{headerData?.phone2}
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     ) : null}
@@ -66,13 +69,16 @@ const Header = ({ headerData }) => {
                                 <div className="header-navigations-phones">
                                     <div className="icon header-navigations-phones-phone"></div>
                                     <ul className="header-navigations-phones-links">
-                                        {headerData.phones.map((phone, index) => {
-                                            return (
-                                                <li key={index}>
-                                                    <a href={`tel:${phone}`}>{phone}</a>
-                                                </li>
-                                            );
-                                        })}
+                                        <li>
+                                            <a href={`tel:+${headerData?.phone1}`}>
+                                                +{headerData?.phone1}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href={`tel:+${headerData?.phone2}`}>
+                                                +{headerData?.phone2}
+                                            </a>
+                                        </li>
                                     </ul>
 
                                     <a href="#" className="btn">
@@ -97,16 +103,17 @@ const Header = ({ headerData }) => {
                         </nav>
                     </header>
                     <div className="text">
-                        <h1>{headerData.title}</h1>
+                        <h1>{headerData?.title}</h1>
                         <p>
-                            <TypeAnimation
-                                sequence={headerData.second_title}
+                            {/* <TypeAnimation
+                                sequence={headerData?.sub}
                                 wrapper="span"
                                 speed={0}
                                 repeat={Infinity}
-                            />
+                            /> */}
+                            {headerData?.sub}
                         </p>
-                        <CyberButton href={'#connect'} />
+                        <CyberButton href={'#connect'} text={headerData?.button} />
                     </div>
                 </div>
             </main>
