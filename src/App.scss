@@ -185,10 +185,23 @@ input,
     background-color: transparent !important;
     padding-left: 20px;
     font-size: 1rem;
+    cursor: pointer;
+    &.error {
+        border: 1px solid #ff5c5c;
+        box-shadow: 0px 0px 10px 0px #ff5c5c;
+        animation: error 1s alternate infinite;
+    }
     &::placeholder {
         color: rgba($color: #fdfdfd, $alpha: 0.6);
     }
-    cursor: pointer;
+}
+@keyframes error {
+    from {
+        box-shadow: 0px 0px 0px 0px #ff5c5c;
+    }
+    to {
+        box-shadow: 0px 0px 10px 0px #ff5c5c;
+    }
 }
 .select {
     position: relative;

@@ -13,47 +13,82 @@ const Connect = ({ tariffs, choosedTarif, setChoosetTarif }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [fioField, setFioField] = useState('');
     const [phoneField, setPhoneField] = useState('');
+    const [personField, setPersonField] = useState(false);
     const [popupInfo, setPopupInfo] = useState({
         title: 'Форма успешно отправлена!',
-        desc: 'В течении суток с вами свяжется оператор',
+        desc: ['В течении суток с вами свяжется оператор'],
     });
     const [isShowPopup, setIsShowPopup] = useState(false);
+
     const handlePopup = () => {
         setIsShowPopup((prev) => !prev);
     };
 
-    // useEffect(() => {
-    //     console.log('fio->', fioField);
-    //     console.log('ph->', phoneField);
-    //     console.log('tar->', choosedTarif);
-    // }, [fioField, phoneField, choosedTarif]);
+    const [validationFields, setValidationFields] = useState({
+        fio: false,
+        phone: false,
+        person: false,
+    });
+
+    useEffect(() => {
+        validateForm();
+    }, [fioField, phoneField, personField]);
+
+    const validateForm = () => {
+        let errors = [];
+
+        if (fioField.length < 1) {
+            setValidationFields((prev) => ({ ...prev, fio: false }));
+            errors.push('Имя');
+        } else {
+            setValidationFields((prev) => ({ ...prev, fio: true }));
+        }
+        if (phoneField.length < 4) {
+            setValidationFields((prev) => ({ ...prev, phone: false }));
+            errors.push('Телефон');
+        } else {
+            setValidationFields((prev) => ({ ...prev, phone: true }));
+        }
+        if (!personField) {
+            setValidationFields((prev) => ({ ...prev, person: false }));
+            errors.push('Согласие на обработку персональных данных');
+        } else {
+            setValidationFields((prev) => ({ ...prev, person: true }));
+        }
+
+        setPopupInfo({ title: 'Ошибка! Заполните следующие поля:', desc: errors });
+    };
 
     const url = `${process.env.REACT_APP_DB_IP}/api/form`;
-    // useEffect(() => {
-    //     console.log(fioField);
-    // }, [fioField]);
 
     const sendForm = (e) => {
         e.preventDefault();
-        axios
-            .post(`${url}`, {
-                firstName: fioField,
-                phone: phoneField,
-                tariffName: choosedTarif,
-            })
-            .then(function (response) {
-                console.log(response.response);
-                setPopupInfo({
-                    title: 'Форма успешно отправлена!',
-                    desc: 'В течении суток с вами свяжется оператор',
+
+        if (
+            validationFields.fio === true &&
+            validationFields.phone === true &&
+            validationFields.person === true
+        ) {
+            axios
+                .post(`${url}`, {
+                    firstName: fioField,
+                    phone: phoneField,
+                    tariffName: choosedTarif,
+                })
+                .then(function (response) {
+                    setPopupInfo({
+                        title: 'Форма успешно отправлена!',
+                        desc: 'В течении суток с вами свяжется оператор',
+                    });
+                    handlePopup();
+                })
+                .catch(function (error) {
+                    setPopupInfo({ title: 'Ошибка', desc: error.response.data.message });
+                    handlePopup();
                 });
-                handlePopup();
-            })
-            .catch(function (error) {
-                console.log(error.response.data.message);
-                setPopupInfo({ title: 'Ошибка', desc: error.response.data.message });
-                handlePopup();
-            });
+        } else {
+            setIsShowPopup(true);
+        }
     };
 
     return (
@@ -64,7 +99,17 @@ const Connect = ({ tariffs, choosedTarif, setChoosetTarif }) => {
                     <div></div>
                 </div>
                 <p className="header">{popupInfo?.title}</p>
-                <p className="desc">{popupInfo?.desc}</p>
+                <p className="desc">
+                    {typeof popupInfo.desc === 'object' ? (
+                        <ul>
+                            {popupInfo?.desc?.map((el) => {
+                                return <li>{el}</li>;
+                            })}
+                        </ul>
+                    ) : (
+                        popupInfo?.desc
+                    )}
+                </p>
             </div>
 
             <div className="container">
@@ -81,12 +126,7 @@ const Connect = ({ tariffs, choosedTarif, setChoosetTarif }) => {
                             saveField(e, setFioField);
                         }}
                     />
-                    {/* <input
-                        required
-                        type="tel"npm i react-router-dom
-                        className="connect-form-phone"
-                        placeholder="Номер телефона"
-                    /> */}
+
                     <InputMask
                         mask="+7 999 999 99 99"
                         maskChar=""
@@ -124,14 +164,27 @@ const Connect = ({ tariffs, choosedTarif, setChoosetTarif }) => {
                     </div>
                     <div className="connect-form-checkbox">
                         <label htmlFor="acception">
-                            <input type="checkbox" name="acception" id="acception" />
+                            <input
+                                type="checkbox"
+                                name="acception"
+                                id="acception"
+                                required
+                                value={personField}
+                                onChange={(e) => {
+                                    setPersonField((prev) => !prev);
+                                }}
+                            />
                             <div className="connect-form-checkbox-fake"></div>
                         </label>
                         <p className="connect-form-checkbox-description">
                             Согласие на <Link to="/person">обработку персональных данных</Link>
                         </p>
                     </div>
-                    <button type="submit" onClick={(e) => sendForm(e)}>
+                    <button
+                        type="submit"
+                        onClick={(e) => {
+                            sendForm(e);
+                        }}>
                         Отправить
                     </button>
                 </form>

@@ -34,6 +34,16 @@
         .desc {
             font-size: 1rem;
             font-family: 'Montserrat Light Italic';
+            ul {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                list-style: decimal;
+                padding-left: 20px;
+                li {
+                    text-align: left;
+                }
+            }
         }
         .close-btn {
             position: absolute;
@@ -86,6 +96,11 @@
                 height: 22px;
                 background-image: url('../../assets/img/icons/checkbox.svg');
                 background-size: cover;
+                &.error {
+                    background-image: url();
+                    border: 1px solid #ff5c5c;
+                    animation: error 1s alternate infinite;
+                }
             }
             input[type='checkbox']:checked ~ &-fake {
                 background-image: url('../../assets/img/icons/checkbox_accept.svg');

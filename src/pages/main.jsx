@@ -137,11 +137,12 @@ function Main() {
         axios.get(tariffsApi).then((data) => {
             let newData = [];
             data.data.forEach((tariffs) => {
-                console.log(tariffs);
+                // console.log(tariffs);
                 newData.push(tariffs.title);
             });
             setTariffsData(data.data);
             setTariffs(newData);
+            setChoosetTarif(newData[0]);
         });
     }
 
