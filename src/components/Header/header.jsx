@@ -103,17 +103,18 @@ const Header = ({ headerData }) => {
                         </nav>
                     </header>
                     <div className="text">
-                        <h1>{headerData?.title}</h1>
+                        <h1>{"Самый быстрый интернет в Москве"}</h1>
                         <p>
-                            {/* <TypeAnimation
-                                sequence={headerData?.sub}
+                            <TypeAnimation
+                                sequence={'Самый быстрый интернет'}
                                 wrapper="span"
                                 speed={0}
                                 repeat={Infinity}
-                            /> */}
-                            {headerData?.sub}
+                            />
+                            {'Самый быстрый интернет'}
                         </p>
-                        <CyberButton href={'#connect'} text={headerData?.button} />
+                        {/* <CyberButton href={'#connect'} text={headerData?.button} /> */}
+                        <CyberButton href={'#connect'} text={"Оформить интернет"} />
                     </div>
                 </div>
             </main>

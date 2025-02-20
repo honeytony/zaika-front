@@ -126,7 +126,7 @@ function Main() {
     ]);
 
     const [tariffs, setTariffs] = useState(['1asdsad', '2asdasd', '3asdasd']);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     function getData(api, setFunction) {
         axios.get(api).then((data) => {
             setFunction(data.data);
@@ -187,9 +187,9 @@ function Main() {
     }
 
     useEffect(() => {
-        getData(infoApi, setHeaderData);
-        getTarrifsData();
-        getData(faqApi, setFaqData);
+        // getData(infoApi, setHeaderData);
+        // getTarrifsData();
+        // getData(faqApi, setFaqData);
     }, []);
 
     useEffect(() => {
